@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.vyorkin.mutagen-sync",
+  "name": "Mutagen Sync",
+  "version": "0.1.0",
+  "author": "Vasiliy Yorkin",
+  "license": "MIT",
+  "description": "Mutagen's synchronization sessions in the Omarchy bar: a glyph that stays quiet while every session watches, a count when one needs a look, and a popup with per-session status, conflicts and flush.",
+  "homepage": "https://github.com/vyorkin/omarchy-mutagen-sync",
+  "repository": "https://github.com/vyorkin/omarchy-mutagen-sync",
+  "keywords": [
+    "mutagen",
+    "sync",
+    "synchronization",
+    "file-sync",
+    "development",
+    "system",
+    "widget"
+  ],
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Mutagen Sync",
+    "description": "Sync session status",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
