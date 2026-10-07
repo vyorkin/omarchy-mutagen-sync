@@ -22,6 +22,15 @@ var LIST_TEMPLATE = '{{range .}}{{.Name}}{{"\\t"}}{{.Status}}{{"\\t"}}{{len .Con
 var POLL_INTERVAL_MS = 5000
 var POLL_INTERVAL_OPEN_MS = 1500
 
+// When `mutagen` is not installed, or the daemon has been failing, polling at
+// the normal cadence only fills the journal: Quickshell logs "Process failed to
+// start" for a binary that is not there, every time. The slow cadence still
+// notices an installation or a recovered daemon within a minute.
+var IDLE_INTERVAL_MS = 60000
+
+// Consecutive failures before the widget stops asking quickly.
+var FAILURE_BACKOFF_AFTER = 3
+
 // A healthy `mutagen sync list` never takes this long; a poll that does has lost
 // its exit event or is stuck behind a wedged daemon, and is killed.
 var POLL_TIMEOUT_MS = 10000
@@ -31,6 +40,13 @@ var MAX_ROWS = 12
 
 function listCommand() {
   return ["mutagen", "sync", "list", "--template", LIST_TEMPLATE]
+}
+
+// Asked before the first poll: invoking a binary that is not installed makes
+// Quickshell log a warning on every attempt, and a missing mutagen is not an
+// error to shout about — it is a fact to report once.
+function presenceCommand() {
+  return ["sh", "-c", "command -v mutagen >/dev/null 2>&1"]
 }
 
 function flushCommand(name) {
