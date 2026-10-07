@@ -107,6 +107,7 @@ Panel {
     Process {
       id: poll
       property int runEpoch: 0
+      property bool released: false
       property string collected: ""
       property var collector: out
       property var errorCollector: err
@@ -309,7 +310,7 @@ Panel {
           width: parent.width
           text: root.errorText
           color: root.urgent
-          WrapMode: Text.WordWrap
+          wrapMode: Text.WordWrap
           font.family: Style.font.family
           font.pixelSize: Style.font.body
           textFormat: Text.PlainText
