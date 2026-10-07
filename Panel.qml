@@ -331,6 +331,13 @@ Panel {
 
   onOpenedChanged: if (opened) poll()
 
+  // The bar sizes a widget slot by its root item's implicit size
+  // (plugins/bar/Bar.qml ModuleSlot), and an Item has none of its own, so the
+  // panel has to forward the button's: without these two lines the widget is a
+  // zero-width slot that paints nothing at all.
+  implicitWidth: button.implicitWidth
+  implicitHeight: button.implicitHeight
+
   // -------------------------------------------------------------------- bar ---
 
   BarIconButton {
